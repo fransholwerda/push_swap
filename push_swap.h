@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   checker.h                                          :+:    :+:            */
+/*   push_swap.h                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/05/14 18:18:45 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/05/27 18:07:30 by fholwerd      ########   odam.nl         */
+/*   Created: 2021/05/27 18:05:24 by fholwerd      #+#    #+#                 */
+/*   Updated: 2021/05/27 18:06:48 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+# include <unistd.h>
+# include <stdio.h> //delete this later
+# include <string.h> //delete this later
+# include "libft/libft.h"
 
-# include "../push_swap.h"
-
-/* Checker */
-int			checker(int argc, char **argv);
-
-/* Struct utility */
-t_numbers	*lst_new(int data);
-void		lst_add_back(t_numbers *list, int data);
-void		lst_loop(t_numbers *list);
+typedef struct s_numbers
+{
+	int					data;
+	struct s_numbers	*next;
+	struct s_numbers	*prev;
+}						t_numbers;
 
 #endif
