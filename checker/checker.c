@@ -6,53 +6,114 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/27 15:43:52 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/05/30 17:58:07 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/06/22 17:16:33 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-static t_numbers	*fill_numbers(int argc, char **argv)
+static void	print_numbers(int argc, t_numbers *num)
 {
-	t_numbers	*num;
-	int			i;
-	
-	i = 2;
-	num = NULL;
+	int	i;
+
+	i = 1;
+	printf("[");
 	while (i < argc)
 	{
-		if (!ft_isint(argv[i]) || argc < 2)
-		{
-			printf("test1\n");
-			write(1, "Wrong input, provide numbers.\n", 30);
-			return (NULL);
-		}
-		printf("test2, argv: %s\n", argv[i]);
-		lst_add_back(num, ft_atoi(argv[i]));
+		printf("%d", num->data);
+		if ((argc - i) > 1)
+			printf(",");
+		num = num->next;
 		i++;
 	}
-	printf("test3 num: %d\n", num->data);
-	lst_loop(num);
-	printf("test4\n");
-	return (num);
+	printf("]\n");
+}
+
+int	swap(int len, t_numbers *num)
+{
+	int	temp;
+
+	if (len <= 1)
+		return (-1);
+	temp = num->data;
+	num->data = num->next->data;
+	num->next->data = temp;
+	return (0);
+}
+
+int	rotate(int len, t_numbers *num)
+{
+	int	temp;
+	int	i;
+
+	if (len <= 1)
+		return (-1);
+	temp = num->data;
+	i = 0;
+	while (i < len)
+	{
+		num->data = num->prev->data;
+		num = num->prev;
+		i++;
+	}
+	num->next->data = temp;
+	return (0);
+}
+
+int	reverse_rotate(int len, t_numbers *num)
+{
+	int	temp;
+	int	i;
+
+	if (len <= 1)
+		return (-1);
+	temp = num->data;
+	i = 0;
+	while (i < len)
+	{
+		num->data = num->next->data;
+		num = num->next;
+		i++;
+	}
+	num->prev->data = temp;
+	return (0);
+}
+
+static void	validate(int len, t_numbers *num)
+{
+	int	i;
+
+	i = 0;
+	while (i < len - 1)
+	{
+		if (num->data >= num->next->data)
+		{
+			write(1, "KO\n", 3);
+			return ;
+		}
+		num = num->next;
+		i++;
+	}
+	write(1, "OK\n", 3);
 }
 
 int	checker(int argc, char **argv)
 {
 	t_numbers	*num;
 	int			i;
+	char		buf[5];
 
-	printf("test0\n");
 	num = fill_numbers(argc, argv);
-	printf("test\n");
 	if (!num)
 		return (-1);
-	i = 0;
-	while (i < argc)
-	{
-		printf("'%d'\n", num->data);
-		num = num->next;
-		i++;
-	}
+	print_numbers(argc, num);
+	validate(argc - 1, num);
+	rotate(argc - 1, num);
+	print_numbers(argc, num);
+	validate(argc - 1, num);
+	// read(0, buf, 5);
+	// buf[4] = '\0';
+	// printf("%s", buf);
+	free_list(num);
 	return (0);
 }
