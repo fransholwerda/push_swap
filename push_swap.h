@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/27 18:05:24 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/06/29 16:29:19 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/06/30 14:59:11 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,31 @@ typedef struct s_numbers
 	struct s_numbers	*prev;
 }						t_numbers;
 
+typedef struct s_stack
+{
+	t_numbers			*num;
+}						t_stack;
+
 /* Struct utility */
 t_numbers	*lst_new(int data);
 void		lst_add_back(t_numbers *list, int data);
-void		lst_loop(t_numbers *list);
 void		free_list(t_numbers **list);
+void		free_stack(t_stack **stack);
+void		lst_loop(t_numbers *list);
 void		lst_unloop(t_numbers *list);
-t_numbers	*add_top(int data, t_numbers *list);
-int			rmv_top(t_numbers *list);
+
+/* Checker */
+int			checker(int argc, char **argv);
 
 /* Rules */
-
-int			rules(char *rule, t_numbers *a, t_numbers *b);
+void		swap(t_numbers *num);
+int			push(t_stack *a, t_stack *b);
+void		rotate(t_numbers *num);
+void		reverse_rotate(t_numbers *num);
+int			rules(char *rule, t_stack *a, t_stack *b);
 
 /* Parsing */
 t_numbers	*fill_numbers(int argc, char **argv);
+t_stack		*fill_stack(int argc, char **argv);
 
 #endif

@@ -6,67 +6,92 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/27 15:43:52 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/06/29 16:50:31 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/06/30 16:49:37 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "../push_swap.h"
 
 static void	print_numbers(t_numbers *num)
 {
 	if (num)
 	{
-		printf("[");
 		while (num->next->pos > num->pos)
 		{
 			printf("%d,", num->data);
 			num = num->next;
 		}
-		printf("%d]\n", num->data);
+		printf("%d", num->data);
 	}
+}
+
+static void	print_stack(t_stack *stack)
+{
+	printf("[");
+	print_numbers(stack->num);
+	printf("]\n");
 }
 
 static void	validate(t_numbers *num)
 {
-	int	i;
-	int	len;
-
-	i = 0;
-	len = num->prev->pos;
-	while (i < len - 1)
+	if (num)
 	{
-		if (num->data >= num->next->data)
+		while (num->next->pos > num->pos)
 		{
-			write(1, "KO\n", 3);
-			return ;
+			if (num->data >= num->next->data)
+			{
+				write(1, "KO\n", 3);
+				return ;
+			}
+			num = num->next;
 		}
-		num = num->next;
-		i++;
+		write(1, "OK\n", 3);
 	}
-	write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
 }
 
 int	checker(int argc, char **argv)
 {
-	t_numbers	*num_a;
-	t_numbers	*num_b;
+	t_stack		*a;
+	t_stack		*b;
 	int			i;
 	char		buf[5];
+	char		*buff;
 
-	num_a = fill_numbers(argc, argv);
-	num_b = NULL;
+	a = fill_stack(argc, argv);
+	b = (t_stack *)malloc(sizeof(t_stack));
+	b->num = NULL;
+	if (!a || !b)
+		return (0);
 	ft_bzero(buf, 5);
-	if (!num_a)
-		return (-1);
-	print_numbers(num_a);
-	validate(num_a);
-	read(0, buf, 5);
-	rules(buf, num_a, num_b);
-	printf("a: ");
-	print_numbers(num_a);
-	printf("b: ");
-	print_numbers(num_b);
-	free_list(&num_a);
-	free_list(&num_b);
-	return (0);
+	print_stack(a);
+	validate(a->num);
+	while (read(0, buf, 4))
+	{
+		if (!rules(buf, a, b))
+		{
+			free_stack(&a);
+			free_stack(&b);
+			return (0);
+		}
+		printf("a: ");
+		print_stack(a);
+		printf("b: ");
+		print_stack(b);
+		validate(a->num);
+	}
+	// if (!rules(buf, a, b))
+	// {
+	// 	free_stack(&a);
+	// 	free_stack(&b);
+	// 	return (0);
+	// }
+	// printf("a: ");
+	// print_stack(a);
+	// printf("b: ");
+	// print_stack(b);
+	free_stack(&a);
+	free_stack(&b);
+	return (1);
 }

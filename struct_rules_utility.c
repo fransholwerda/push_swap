@@ -6,76 +6,77 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/29 13:29:26 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/06/29 16:38:25 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/06/30 15:58:45 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	lst_unloop(t_numbers *list)
+static int	add_top(int data, t_stack *stack)
 {
-	t_numbers	*last;
-
-	if (list->prev)
-	{
-		last = list->prev;
-		list->prev = NULL;
-		last->next = NULL;
-	}
-}
-
-t_numbers	*add_top(int data, t_numbers *list)
-{
-	t_numbers	*first;
+	t_numbers	*num;
 	int			temp_a;
 	int			temp_b;
 
-	if (!list)
+	if (!stack->num)
 	{
-		list = lst_new(data);
-		lst_loop(list);
-		return (list);
-	}
-	lst_unloop(list);
-	first = list;
-	temp_a = list->data;
-	list->data = data;
-	while(list->next)
-	{
-		list = list->next;
-		temp_b = list->data;
-		list->data = temp_a;
-		temp_a = temp_b;
-	}
-	lst_add_back(list, temp_a);
-	lst_loop(first);
-	return	(first);
-}
-
-int	rmv_top(t_numbers *list)
-{
-	t_numbers	*first;
-	t_numbers	*last;
-	int			data;
-
-	if (!list->next)
-	{
-		data = list->data;
-		free(list);
+		stack->num = lst_new(data);
+		if (!stack->num)
+			return (0);
+		lst_loop(stack->num);
 	}
 	else
 	{
-		data = list->data;
-		first = list;
-		last = list->prev->prev;
-		while (list->next->pos > list->pos)
+		lst_unloop(stack->num);
+		num = stack->num;
+		temp_a = num->data;
+		num->data = data;
+		while (num->next)
 		{
-			list->data = list->next->data;
-			list = list->next;
+			num = num->next;
+			temp_b = num->data;
+			num->data = temp_a;
+			temp_a = temp_b;
 		}
-		free(list);
-		first->prev = last;
-		last->next = first;
+		lst_add_back(stack->num, temp_a);
+		lst_loop(stack->num);
 	}
-	return (data);
+	return (1);
+}
+
+static void	rmv_top(t_stack *stack)
+{
+	t_numbers	*num;
+	t_numbers	*last;
+
+	if (stack->num->pos == stack->num->next->pos)
+	{
+		free(stack->num);
+		stack->num = NULL;
+	}
+	else
+	{
+		num = stack->num;
+		last = num->prev->prev;
+		while (num->next->pos > num->pos)
+		{
+			num->data = num->next->data;
+			num = num->next;
+		}
+		free(num);
+		num = NULL;
+		stack->num->prev = last;
+		last->next = stack->num;
+	}
+}
+
+int	push(t_stack *a, t_stack *b)
+{	
+	if (b->num)
+	{
+		if (!add_top(b->num->data, a))
+			return (0);
+		rmv_top(b);
+	}
+	return (1);
 }

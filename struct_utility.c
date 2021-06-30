@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/27 16:37:00 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/06/29 14:31:08 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/06/30 15:37:52 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,56 +41,26 @@ void	lst_add_back(t_numbers *list, int data)
 	}
 }
 
-void	lst_loop(t_numbers *list)
-{
-	t_numbers	*list_first;
-
-	if (!list)
-		return ;
-	list_first = list;
-	while (list->next)
-	{
-		list = list->next;
-	}
-	list->next = list_first;
-	list_first->prev = list;
-}
-
-void	list_free(t_numbers *list)
-{
-	t_numbers	*temp;
-
-	if (list)
-	{
-		if (list->next)
-		{
-			while (list->next->pos > list->pos)
-			{
-				temp = list;
-				list = list->next;
-				free (temp);
-			}
-		}
-		free(list);
-		list = NULL;
-	}
-}
-
-void	free_list(t_numbers **list) 
+void	free_stack(t_stack **stack)
 {
 	t_numbers	*next;
 	t_numbers	*temp;
 
-	if (list && *list)
+	if (stack && *stack)
 	{
-		next = (*list)->next;
-		while (next && (next != *list))
+		if ((*stack)->num)
 		{
-			temp = next;
-			next = next->next;
-			free(temp);
+			next = (*stack)->num->next;
+			while (next && (next != (*stack)->num))
+			{
+				temp = next;
+				next = next->next;
+				free(temp);
+			}
+			free((*stack)->num);
+			(*stack)->num = NULL;
 		}
-		free(*list);
-		*list = NULL;
+		free(*stack);
+		*stack = NULL;
 	}
 }
