@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/22 16:59:49 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/06/22 17:00:02 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/06/29 13:48:41 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_numbers	*fill_numbers(int argc, char **argv)
 	num = NULL;
 	while (i < argc)
 	{
-		if (!ft_isint(argv[i]) || argc < 2)
+		if ((!ft_isint(argv[i]) && argv[i][0] != '-')|| argc < 2)
 		{
 			write(1, "Error\n", 6);
 			return (NULL);

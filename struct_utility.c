@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/27 16:37:00 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/06/22 17:14:28 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/06/29 14:31:08 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,41 @@ void	lst_loop(t_numbers *list)
 	list_first->prev = list;
 }
 
-void	free_list(t_numbers *list)
+void	list_free(t_numbers *list)
 {
-	while (list->next)
+	t_numbers	*temp;
+
+	if (list)
 	{
-		list = list->next;
-		free (list->prev);
+		if (list->next)
+		{
+			while (list->next->pos > list->pos)
+			{
+				temp = list;
+				list = list->next;
+				free (temp);
+			}
+		}
+		free(list);
+		list = NULL;
 	}
-	free(list);
+}
+
+void	free_list(t_numbers **list) 
+{
+	t_numbers	*next;
+	t_numbers	*temp;
+
+	if (list && *list)
+	{
+		next = (*list)->next;
+		while (next && (next != *list))
+		{
+			temp = next;
+			next = next->next;
+			free(temp);
+		}
+		free(*list);
+		*list = NULL;
+	}
 }

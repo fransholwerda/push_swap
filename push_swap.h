@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/27 18:05:24 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/06/22 17:15:04 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/06/29 16:29:19 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,14 @@ typedef struct s_numbers
 t_numbers	*lst_new(int data);
 void		lst_add_back(t_numbers *list, int data);
 void		lst_loop(t_numbers *list);
-void		free_list(t_numbers *list);
+void		free_list(t_numbers **list);
+void		lst_unloop(t_numbers *list);
+t_numbers	*add_top(int data, t_numbers *list);
+int			rmv_top(t_numbers *list);
+
+/* Rules */
+
+int			rules(char *rule, t_numbers *a, t_numbers *b);
 
 /* Parsing */
 t_numbers	*fill_numbers(int argc, char **argv);
