@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/29 13:14:59 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/06/30 15:50:28 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/06/30 18:50:53 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	rotate(t_numbers *num)
 			num = num->prev;
 			i++;
 		}
-		num->next->data = temp;
+		num->data = temp;
 	}
 }
 
@@ -62,14 +62,16 @@ void	reverse_rotate(t_numbers *num)
 			num = num->next;
 			i++;
 		}
-		num->prev->data = temp;
+		num->data = temp;
 	}
 }
 
 static int	rules_extended(char *rule, t_stack *a, t_stack *b)
 {
 	if (ft_strncmp(rule, "ra", 2) == 0 && rule[2] == '\n')
+	{
 		rotate(a->num);
+	}
 	else if (ft_strncmp(rule, "rb", 2) == 0 && rule[2] == '\n')
 		rotate(b->num);
 	else if (ft_strncmp(rule, "rr", 2) == 0 && rule[2] == '\n')
