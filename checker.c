@@ -6,11 +6,11 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/27 15:43:52 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/06/30 16:49:37 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/07/22 13:29:57 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
 static void	print_numbers(t_numbers *num)
 {
@@ -32,9 +32,9 @@ static void	print_stack(t_stack *stack)
 	printf("]\n");
 }
 
-static void	validate(t_numbers *num)
+static void	validate(t_numbers *num, int count)
 {
-	if (num)
+	if (num && num->prev->pos == count - 1)
 	{
 		while (num->next->pos > num->pos)
 		{
@@ -55,9 +55,7 @@ int	checker(int argc, char **argv)
 {
 	t_stack		*a;
 	t_stack		*b;
-	int			i;
 	char		buf[5];
-	char		*buff;
 
 	a = fill_stack(argc, argv);
 	b = (t_stack *)malloc(sizeof(t_stack));
@@ -66,7 +64,7 @@ int	checker(int argc, char **argv)
 		return (0);
 	ft_bzero(buf, 5);
 	print_stack(a);
-	validate(a->num);
+	validate(a->num, argc - 1);
 	while (read(0, buf, 4))
 	{
 		if (!rules(buf, a, b))
@@ -79,7 +77,7 @@ int	checker(int argc, char **argv)
 		print_stack(a);
 		printf("b: ");
 		print_stack(b);
-		validate(a->num);
+		validate(a->num, argc - 1);
 	}
 	// if (!rules(buf, a, b))
 	// {

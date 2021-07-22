@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/27 18:05:24 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/06/30 14:59:11 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/07/22 14:08:22 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_numbers
 {
 	int					data;
 	int					pos;
+	int					index;
 	struct s_numbers	*next;
 	struct s_numbers	*prev;
 }						t_numbers;

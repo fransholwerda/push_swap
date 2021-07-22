@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/27 16:37:00 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/06/30 15:37:52 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/07/22 14:09:39 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_numbers	*lst_new(int data)
 	lst = (t_numbers *)malloc(sizeof(t_numbers));
 	lst->data = data;
 	lst->pos = 0;
+	lst->index = -1;
 	lst->next = NULL;
 	lst->prev = NULL;
 	return (lst);
