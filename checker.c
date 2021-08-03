@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/27 15:43:52 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/07/22 13:29:57 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/08/03 13:13:05 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,6 @@ int	checker(int argc, char **argv)
 		print_stack(b);
 		validate(a->num, argc - 1);
 	}
-	// if (!rules(buf, a, b))
-	// {
-	// 	free_stack(&a);
-	// 	free_stack(&b);
-	// 	return (0);
-	// }
-	// printf("a: ");
-	// print_stack(a);
-	// printf("b: ");
-	// print_stack(b);
 	free_stack(&a);
 	free_stack(&b);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/27 18:05:24 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/07/22 14:08:22 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/08/03 16:16:05 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ typedef struct s_stack
 {
 	t_numbers			*num;
 }						t_stack;
+
+typedef struct s_instructions
+{
+	char					*data;
+	struct s_instructions	*next;
+}							t_instructions;
 
 /* Struct utility */
 t_numbers	*lst_new(int data);

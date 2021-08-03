@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/22 16:04:38 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/07/22 14:51:35 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/08/03 17:31:11 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void	print_numbers(t_numbers *num)
 	{
 		while (num->next->pos > num->pos)
 		{
-			printf("%d,", num->index);
+			printf("%d,", num->data);
 			num = num->next;
 		}
-		printf("%d", num->index);
+		printf("%d", num->data);
 	}
 }
 
@@ -30,6 +30,57 @@ static void	print_stack(t_stack *stack)
 	printf("[");
 	print_numbers(stack->num);
 	printf("]\n");
+}
+
+void	radix_sort(t_stack *a, t_stack *b)
+{
+	int	size;
+	int	bit_digits;
+	int	i;
+	int	j;
+
+	size = a->num->prev->pos;
+	bit_digits = 0;
+	while ((size >> bit_digits) != 0)
+		bit_digits++;
+	i = 0;
+	while (i < bit_digits)
+	{
+		j = 0;
+		while (j <= size)
+		{
+			if (((a->num->data >> i) & 1) == 1)
+			{
+				write(1, "ra\n", 3);
+				rules("ra\n", a, b);
+			}
+			else
+			{
+				write(1, "pb\n", 3);
+				rules("pb\n", a, b);
+			}
+			j++;
+		}
+		while (b->num)
+		{
+			write(1, "pa\n", 3);
+			rules("pa\n", a, b);
+		}
+		i++;
+	}
+}
+
+void	replace_data(t_stack *a, int count)
+{
+	t_numbers	*num;
+
+	num = a->num;
+	while (num->pos < num->next->pos)
+	{
+		num->data = num->index;
+		num = num->next;
+	}
+	num->data = num->index;
 }
 
 /* Assigns a postive index to each number in the list,
@@ -58,6 +109,7 @@ void	index_stack(t_stack *a, int count)
 		temp->index = i;
 		i++;
 	}
+	replace_data(a, count);
 }
 
 int	main(int argc, char **argv)
@@ -65,6 +117,7 @@ int	main(int argc, char **argv)
 	t_stack	*a;
 	t_stack	*b;
 
+	printf("argc: %d\n", argc);
 	a = fill_stack(argc, argv);
 	b = (t_stack *)malloc(sizeof(t_stack));
 	b->num = NULL;
@@ -74,7 +127,12 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	index_stack(a, argc - 1);
-	print_stack(a);
+	//print_stack(a);
+	radix_sort(a, b);
+	// printf("a: ");
+	// print_stack(a);
+	// printf("b: ");
+	// print_stack(b);
 	free_stack(&a);
 	free_stack(&b);
 	return (0);

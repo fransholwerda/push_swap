@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/29 13:14:59 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/06/30 18:50:53 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/08/03 16:52:56 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	rotate(t_numbers *num)
 		i = 0;
 		while (i < len)
 		{
-			num->data = num->prev->data;
-			num = num->prev;
+			num->data = num->next->data;
+			num = num->next;
 			i++;
 		}
 		num->data = temp;
@@ -58,8 +58,8 @@ void	reverse_rotate(t_numbers *num)
 		i = 0;
 		while (i < len)
 		{
-			num->data = num->next->data;
-			num = num->next;
+			num->data = num->prev->data;
+			num = num->prev;
 			i++;
 		}
 		num->data = temp;
