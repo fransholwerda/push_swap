@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/22 16:59:49 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/08/04 12:14:36 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/08/04 13:52:48 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_numbers	*fill_numbers(int argc, char **argv)
 				while (ft_isdigit(argv[1][i]) || argv[1][i] == '-')
 					i++;
 			}
+			i++;
 		}
 	}
 	lst_loop(num);

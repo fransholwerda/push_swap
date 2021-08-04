@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/22 16:04:38 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/08/03 17:31:11 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/08/04 14:09:20 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	index_stack(t_stack *a, int count)
 	int			i;
 
 	i = 0;
-	while (i < count)
+	while (i <= count)
 	{
 		num = a->num;
 		while (num->index != -1 && num->pos < num->next->pos)
@@ -117,7 +117,6 @@ int	main(int argc, char **argv)
 	t_stack	*a;
 	t_stack	*b;
 
-	printf("argc: %d\n", argc);
 	a = fill_stack(argc, argv);
 	b = (t_stack *)malloc(sizeof(t_stack));
 	b->num = NULL;
@@ -126,7 +125,8 @@ int	main(int argc, char **argv)
 		write(1, "Error\n", 6);
 		return (0);
 	}
-	index_stack(a, argc - 1);
+	//print_stack(a);
+	index_stack(a, a->num->prev->pos);
 	//print_stack(a);
 	radix_sort(a, b);
 	// printf("a: ");
