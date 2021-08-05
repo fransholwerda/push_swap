@@ -6,31 +6,31 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/22 16:04:38 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/08/05 11:24:08 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/08/05 13:24:09 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	print_numbers(t_numbers *num)
-{
-	if (num)
-	{
-		while (num->next->pos > num->pos)
-		{
-			printf("%d,", num->data);
-			num = num->next;
-		}
-		printf("%d", num->data);
-	}
-}
+// static void	print_numbers(t_numbers *num)
+// {
+// 	if (num)
+// 	{
+// 		while (num->next->pos > num->pos)
+// 		{
+// 			printf("%d,", num->data);
+// 			num = num->next;
+// 		}
+// 		printf("%d", num->data);
+// 	}
+// }
 
-static void	print_stack(t_stack *stack)
-{
-	printf("[");
-	print_numbers(stack->num);
-	printf("]\n");
-}
+// static void	print_stack(t_stack *stack)
+// {
+// 	printf("[");
+// 	print_numbers(stack->num);
+// 	printf("]\n");
+// }
 
 void	radix_sort(t_stack *a, t_stack *b)
 {
@@ -71,7 +71,7 @@ void	radix_sort(t_stack *a, t_stack *b)
 }
 
 /* Replacing the data (number) with the index itself */
-void	replace_data(t_stack *a, int count)
+static void	replace_data(t_stack *a)
 {
 	t_numbers	*num;
 
@@ -86,7 +86,7 @@ void	replace_data(t_stack *a, int count)
 
 /* Assigns a postive index to each number in the list,
 the lowest number becomes 0, second lowest becomes 1, etc. */
-void	index_stack(t_stack *a, int count)
+static void	index_stack(t_stack *a, int count)
 {
 	t_numbers	*num;
 	t_numbers	*temp;
@@ -110,7 +110,7 @@ void	index_stack(t_stack *a, int count)
 		temp->index = i;
 		i++;
 	}
-	replace_data(a, count);
+	replace_data(a);
 }
 
 int	main(int argc, char **argv)

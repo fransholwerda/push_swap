@@ -6,51 +6,55 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/04/15 16:51:44 by fholwerd      #+#    #+#                  #
-#    Updated: 2021/07/22 13:21:06 by fholwerd      ########   odam.nl          #
+#    Updated: 2021/08/05 15:00:17 by fholwerd      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 NAME_CHECKER = checker
-SRCS = parse.c rules.c struct_loop_utility.c struct_rules_utility.c \
-		struct_utility.c
+SRCS = parse.c\
+		rules.c\
+		struct_loop_utility.c\
+		struct_rules_utility.c\
+		struct_utility.c\
+		./gnl/get_next_line.c\
+		./gnl/get_next_line_utils.c
+SRCS_PUSH_SWAP = push_swap.c
 SRCS_BONUS = checker.c
+LIBS = ./libft/libft.a
 OBJS = $(SRCS:.c=.o)
+OBJS_PUSH_SWAP = $(SRCS_PUSH_SWAP:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
-HEADERS = push_swap.h
+HEADERS = push_swap.h get_next_line.h
 CFLAGS = -Wall -Wextra -Werror
 
 ifdef WITH_BONUS
- OBJ_FILES = $(OBJS) $(OBJS_BONUS)
- NAME = checker
+ MAIN = $(OBJS_BONUS)
+ NAME = $(NAME_CHECKER)
 else
- OBJ_FILES = $(OBJS)
- NAME = push_swap
+ MAIN = $(OBJS_PUSH_SWAP)
 endif
 
 all: $(NAME)
 
-$(NAME): $(OBJ_FILES)
-	ar rc $@ $^
-	cd libft && $(MAKE)
+$(NAME): $(OBJS) $(MAIN)
+	make -C ./libft bonus
+	$(CC) $(OBJS) $(LIBS) $(MAIN) -o $(NAME)
+	chmod +x $(NAME)
 
 %.o: %.c $(HEADERS)
 	$(CC) -c $(CFLAGS) -o $@ $<
-	$(CC) $(NAME) libft/libft.a main.c -o checker
 
 bonus:
 	$(MAKE) WITH_BONUS=1 all
 
 clean:
-	rm -f $(OBJS) $(OBJS_BONUS)
-	cd libft && $(MAKE) clean
+	make -C ./libft clean
+	rm -f $(OBJS) $(OBJS_PUSH_SWAP) $(OBJS_BONUS)
 
-cleanlocal:
-	rm -f $(OBJS) $(OBJS_BONUS)
-
-fclean: cleanlocal
+fclean: clean
+	make -C ./libft fclean
 	rm -f $(NAME) $(NAME_CHECKER)
-	cd libft && $(MAKE) fclean
 
 re: fclean all
 

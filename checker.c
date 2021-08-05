@@ -6,35 +6,35 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/27 15:43:52 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/08/03 13:13:05 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/08/05 14:43:45 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	print_numbers(t_numbers *num)
+// static void	print_numbers(t_numbers *num)
+// {
+// 	if (num)
+// 	{
+// 		while (num->next->pos > num->pos)
+// 		{
+// 			printf("%d,", num->data);
+// 			num = num->next;
+// 		}
+// 		printf("%d", num->data);
+// 	}
+// }
+
+// static void	print_stack(t_stack *stack)
+// {
+// 	printf("[");
+// 	print_numbers(stack->num);
+// 	printf("]\n");
+// }
+
+static void	validate(t_numbers *num)
 {
 	if (num)
-	{
-		while (num->next->pos > num->pos)
-		{
-			printf("%d,", num->data);
-			num = num->next;
-		}
-		printf("%d", num->data);
-	}
-}
-
-static void	print_stack(t_stack *stack)
-{
-	printf("[");
-	print_numbers(stack->num);
-	printf("]\n");
-}
-
-static void	validate(t_numbers *num, int count)
-{
-	if (num && num->prev->pos == count - 1)
 	{
 		while (num->next->pos > num->pos)
 		{
@@ -63,23 +63,24 @@ int	checker(int argc, char **argv)
 	if (!a || !b)
 		return (0);
 	ft_bzero(buf, 5);
-	print_stack(a);
-	validate(a->num, argc - 1);
 	while (read(0, buf, 4))
 	{
 		if (!rules(buf, a, b))
 		{
+			printf("oops!\n");
 			free_stack(&a);
 			free_stack(&b);
 			return (0);
 		}
-		printf("a: ");
-		print_stack(a);
-		printf("b: ");
-		print_stack(b);
-		validate(a->num, argc - 1);
 	}
+	validate(a->num);
 	free_stack(&a);
 	free_stack(&b);
 	return (1);
+}
+
+int	main(int argc, char **argv)
+{
+	checker(argc, argv);
+	return (0);
 }
