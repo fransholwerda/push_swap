@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/22 16:04:38 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/08/04 14:09:20 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/08/05 11:24:08 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	radix_sort(t_stack *a, t_stack *b)
 	}
 }
 
+/* Replacing the data (number) with the index itself */
 void	replace_data(t_stack *a, int count)
 {
 	t_numbers	*num;

@@ -6,12 +6,13 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/29 13:14:59 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/08/04 14:58:21 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/08/05 11:29:25 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/* Swapping the top two numbers of a stack with eachother */
 void	swap(t_numbers *num)
 {
 	int	temp;
@@ -24,6 +25,7 @@ void	swap(t_numbers *num)
 	}
 }
 
+/* Moving a number from the top of the stack to the bottom of the stack */
 void	rotate(t_numbers *num)
 {
 	int	temp;
@@ -45,6 +47,7 @@ void	rotate(t_numbers *num)
 	}
 }
 
+/* Moving a number from the bottom of the stack to the top of the stack */
 void	reverse_rotate(t_numbers *num)
 {
 	int	temp;
@@ -66,6 +69,7 @@ void	reverse_rotate(t_numbers *num)
 	}
 }
 
+/* Extension of the function below, 25 line limit is not enough */
 static int	rules_extended(char *rule, t_stack *a, t_stack *b)
 {
 	if (ft_strncmp(rule, "ra", 2) == 0 && rule[2] == '\n')
@@ -93,6 +97,7 @@ static int	rules_extended(char *rule, t_stack *a, t_stack *b)
 	return (1);
 }
 
+/* Translating the commands into actions */
 int	rules(char *rule, t_stack *a, t_stack *b)
 {
 	if (ft_strncmp(rule, "sa", 2) == 0 && rule[2] == '\n')
