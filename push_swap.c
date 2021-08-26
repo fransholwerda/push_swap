@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/22 16:04:38 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/08/05 13:24:09 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/08/26 13:00:31 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,44 +31,6 @@
 // 	print_numbers(stack->num);
 // 	printf("]\n");
 // }
-
-void	radix_sort(t_stack *a, t_stack *b)
-{
-	int	size;
-	int	bit_digits;
-	int	i;
-	int	j;
-
-	size = a->num->prev->pos;
-	bit_digits = 0;
-	while ((size >> bit_digits) != 0)
-		bit_digits++;
-	i = 0;
-	while (i < bit_digits)
-	{
-		j = 0;
-		while (j <= size)
-		{
-			if (((a->num->data >> i) & 1) == 1)
-			{
-				write(1, "ra\n", 3);
-				rules("ra\n", a, b);
-			}
-			else
-			{
-				write(1, "pb\n", 3);
-				rules("pb\n", a, b);
-			}
-			j++;
-		}
-		while (b->num)
-		{
-			write(1, "pa\n", 3);
-			rules("pa\n", a, b);
-		}
-		i++;
-	}
-}
 
 /* Replacing the data (number) with the index itself */
 static void	replace_data(t_stack *a)
@@ -124,16 +86,17 @@ int	main(int argc, char **argv)
 	if (!a || !b)
 	{
 		write(1, "Error\n", 6);
+		if (a)
+			free_stack(&a);
+		if (b)
+			free_stack(&b);
 		return (0);
 	}
-	//print_stack(a);
-	index_stack(a, a->num->prev->pos);
-	//print_stack(a);
-	radix_sort(a, b);
-	// printf("a: ");
-	// print_stack(a);
-	// printf("b: ");
-	// print_stack(b);
+	if (!validate_stack)
+	{
+		index_stack(a, a->num->prev->pos);
+		radix_sort(a, b);
+	}
 	free_stack(&a);
 	free_stack(&b);
 	return (0);

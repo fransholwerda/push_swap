@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/27 18:05:24 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/08/03 16:16:05 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/08/26 12:53:23 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ int			rules(char *rule, t_stack *a, t_stack *b);
 /* Parsing */
 t_numbers	*fill_numbers(int argc, char **argv);
 t_stack		*fill_stack(int argc, char **argv);
+int			validate_stack(t_stack *stack);
 
 #endif

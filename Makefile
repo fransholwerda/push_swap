@@ -6,7 +6,7 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/04/15 16:51:44 by fholwerd      #+#    #+#                  #
-#    Updated: 2021/08/05 15:00:17 by fholwerd      ########   odam.nl          #
+#    Updated: 2021/08/26 12:33:56 by fholwerd      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = push_swap
 NAME_CHECKER = checker
 SRCS = parse.c\
 		rules.c\
+		sort.c\
 		struct_loop_utility.c\
 		struct_rules_utility.c\
 		struct_utility.c\
