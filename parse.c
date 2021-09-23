@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/22 16:59:49 by fholwerd      #+#    #+#                 */
-/*   Updated: 2021/08/26 12:43:14 by fholwerd      ########   odam.nl         */
+/*   Updated: 2021/09/23 11:24:08 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static t_numbers	*single_argument(char **argv)
 t_numbers	*fill_numbers(int argc, char **argv)
 {
 	t_numbers	*num;
-	int			i;
 
 	num = NULL;
 	if (argc > 2 || (argc == 2 && ft_isint(argv[1])))
