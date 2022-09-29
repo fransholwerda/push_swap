@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 15:36:42 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/09/29 15:36:50 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/09/29 16:29:49 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ void	radix_sort(t_stack *a, t_stack *b)
 	while ((size >> bit_digits) != 0)
 		bit_digits++;
 	i = 0;
+	printf("size: %d\n", size);
 	while (i < bit_digits)
 	{
 		j = 0;
 		while (j <= size)
 		{
+			printf("\ni: %d\nj: %d\n", i, j);
 			if (((a->num->data >> i) & 1) == 1)
 			{
 				write(1, "ra\n", 3);

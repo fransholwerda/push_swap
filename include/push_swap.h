@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/28 16:57:00 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/09/29 15:20:29 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/09/29 16:11:23 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ void		free_stack(t_stack *stack);
 void		lst_loop(t_numbers *list);
 void		lst_unloop(t_numbers *list);
 
+/* Parsing */
+t_numbers	*fill_numbers(int argc, char **argv);
+t_stack		*fill_stack(int argc, char **argv);
+int			validate_stack(t_stack *stack);
+
 /* Checker */
 int			checker(int argc, char **argv);
 
@@ -60,10 +65,8 @@ void		rotate(t_numbers *num);
 void		reverse_rotate(t_numbers *num);
 void		rules(char *rule, t_stack *a, t_stack *b);
 
-/* Parsing */
-t_numbers	*fill_numbers(int argc, char **argv);
-t_stack		*fill_stack(int argc, char **argv);
-int			validate_stack(t_stack *stack);
+/* Sorting */
+void	radix_sort(t_stack *a, t_stack *b);
 
 /* Error handling */
 void		stop(char *s);

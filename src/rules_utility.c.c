@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 15:14:34 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/09/29 15:34:28 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/09/29 16:33:08 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ static void	add_top(int data, t_stack *stack)
 	int			temp_a;
 	int			temp_b;
 
+	printf("derp?\n");
 	if (!stack->num)
 	{
+		printf("derp?\n");
 		stack->num = lst_new(data);
 		if (!stack->num)
 			stop("Error\n");

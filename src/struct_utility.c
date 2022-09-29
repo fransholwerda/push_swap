@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/28 16:59:40 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/09/29 13:33:29 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/09/29 15:56:02 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,30 +67,6 @@ void	free_stack(t_stack *stack)
 		stack = NULL;
 	}
 }
-
-// void	free_stack(t_stack **stack)
-// {
-// 	t_numbers	*next;
-// 	t_numbers	*temp;
-
-// 	if (stack && *stack)
-// 	{
-// 		if ((*stack)->num)
-// 		{
-// 			next = (*stack)->num->next;
-// 			while (next && (next != (*stack)->num))
-// 			{
-// 				temp = next;
-// 				next = next->next;
-// 				free(temp);
-// 			}
-// 			free((*stack)->num);
-// 			(*stack)->num = NULL;
-// 		}
-// 		free(*stack);
-// 		*stack = NULL;
-// 	}
-// }
 
 /* Connecting the first and last entries of the list with eachother, 
 making it circular */
