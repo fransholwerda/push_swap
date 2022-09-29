@@ -6,14 +6,15 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/28 16:57:00 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/09/28 16:57:19 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/09/29 15:20:29 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include <unistd.h>
-
+# include <stdlib.h>
+# include <errno.h>
 
 
 
@@ -45,7 +46,7 @@ typedef struct s_instructions
 t_numbers	*lst_new(int data);
 void		lst_add_back(t_numbers *list, int data);
 void		free_list(t_numbers **list);
-void		free_stack(t_stack **stack);
+void		free_stack(t_stack *stack);
 void		lst_loop(t_numbers *list);
 void		lst_unloop(t_numbers *list);
 
@@ -54,14 +55,17 @@ int			checker(int argc, char **argv);
 
 /* Rules */
 void		swap(t_numbers *num);
-int			push(t_stack *a, t_stack *b);
+void		push(t_stack *a, t_stack *b);
 void		rotate(t_numbers *num);
 void		reverse_rotate(t_numbers *num);
-int			rules(char *rule, t_stack *a, t_stack *b);
+void		rules(char *rule, t_stack *a, t_stack *b);
 
 /* Parsing */
 t_numbers	*fill_numbers(int argc, char **argv);
 t_stack		*fill_stack(int argc, char **argv);
 int			validate_stack(t_stack *stack);
+
+/* Error handling */
+void		stop(char *s);
 
 #endif
