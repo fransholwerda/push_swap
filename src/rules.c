@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 15:11:09 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/09/29 16:32:08 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/10/03 17:43:55 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	rules_extended(char *rule, t_stack *a, t_stack *b)
 }
 
 /* Translating the commands into actions */
-void	rules(char *rule, t_stack *a, t_stack *b)
+void	rules(char *rule, t_stack *a, t_stack *b, int print)
 {
 	if (ft_strncmp(rule, "sa", 2) == 0 && rule[2] == '\n')
 		swap(a->num);
@@ -113,5 +113,7 @@ void	rules(char *rule, t_stack *a, t_stack *b)
 		push(b, a);
 	else
 		rules_extended(rule, a, b);
+	if (print == 1)
+		write(1, rule, ft_strlen(rule));
 }
 	
