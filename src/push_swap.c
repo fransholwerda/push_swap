@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/28 17:07:02 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/10/03 17:28:05 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/10/12 18:05:28 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ int	main(int argc, char **argv)
 		if (!validate_stack(a))
 		{
 			index_stack(a, a->num->prev->pos);
-			radix_sort(a, b);
+			five_sort(a, b);
+			//radix_sort(a, b);
 		}
 		free_stack(a);
 		free_stack(b);
