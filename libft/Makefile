@@ -6,7 +6,7 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/05 12:14:31 by fholwerd      #+#    #+#                  #
-#    Updated: 2022/09/29 14:53:19 by fholwerd      ########   odam.nl          #
+#    Updated: 2022/10/13 16:09:51 by fholwerd      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,22 +70,22 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
-	ar rc $@ $^
+	@ar rc $@ $^
 
 %.o: %.c $(HEADERS)
-	$(CC) -c $(CFLAGS) -o $@ $<
+	@$(CC) -c $(CFLAGS) -o $@ $<
 
 bonus:
-	$(MAKE) WITH_BONUS=1 all
+	@$(MAKE) WITH_BONUS=1 all
 
 so:
-	gcc -shared -o libft.so $(OBJ_FILES)
+	@gcc -shared -o libft.so $(OBJ_FILES)
 
 clean:
-	rm -f $(OBJS) $(OBJS_BONUS)
+	@rm -f $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
-	rm -f $(NAME) libft.so
+	@rm -f $(NAME) libft.so
 
 re: fclean all
 

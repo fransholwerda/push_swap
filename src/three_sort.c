@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 14:59:20 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/10/12 17:08:54 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/10/13 11:49:37 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	three_sort(t_stack *a, t_stack *b)
 		rules("ra\n", a, b, 1);
 	else if (num->next->data < num->data && num->next->data > num->prev->data)
 	{
-		rules("sa", a, b, 1);
+		rules("sa\n", a, b, 1);
 		rules("rra\n", a, b, 1);
 	}
 }

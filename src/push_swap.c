@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/28 17:07:02 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/10/12 18:05:28 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/10/13 16:07:41 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	stop(char *s)
 {
 	if (errno == 0)
 		write(2, s, ft_strlen(s));
-	else
-		perror(s);
 	exit(EXIT_FAILURE);
 }
 
@@ -87,8 +85,10 @@ int	main(int argc, char **argv)
 		if (!validate_stack(a))
 		{
 			index_stack(a, a->num->prev->pos);
-			five_sort(a, b);
-			//radix_sort(a, b);
+			if (a->num->prev->pos <= 4)
+				five_sort(a, b);
+			else
+				radix_sort(a, b);
 		}
 		free_stack(a);
 		free_stack(b);

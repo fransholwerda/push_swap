@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/28 16:57:00 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/10/12 17:13:40 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/10/13 15:31:55 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <errno.h>
-
-
-
-
-# include <stdio.h> //delete this later
-# include <string.h> //delete this later
 
 typedef struct s_numbers
 {
@@ -49,7 +43,6 @@ void		free_list(t_numbers **list);
 void		free_stack(t_stack *stack);
 void		lst_loop(t_numbers *list);
 void		lst_unloop(t_numbers *list);
-int			locate_smallest(t_numbers *num);
 
 /* Parsing */
 t_numbers	*fill_numbers(int argc, char **argv);
@@ -60,11 +53,13 @@ int			validate_stack(t_stack *stack);
 int			checker(int argc, char **argv);
 
 /* Rules */
+void		add_top(int data, t_stack *stack);
+void		rmv_top(t_stack *stack);
 void		swap(t_numbers *num);
 void		push(t_stack *a, t_stack *b);
 void		rotate(t_numbers *num);
 void		reverse_rotate(t_numbers *num);
-void		rules(char *rule, t_stack *a, t_stack *b, int print);
+int			rules(char *rule, t_stack *a, t_stack *b, int print);
 
 /* Sorting */
 void		five_sort(t_stack *a, t_stack *b);

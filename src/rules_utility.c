@@ -6,18 +6,35 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 15:14:34 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/10/03 17:42:35 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/10/13 13:35:27 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-static void	add_top(int data, t_stack *stack)
+static void	insert(int data, t_stack *stack)
 {
 	t_numbers	*num;
 	int			temp_a;
 	int			temp_b;
 
+	lst_unloop(stack->num);
+	num = stack->num;
+	temp_a = num->data;
+	num->data = data;
+	while (num->next)
+	{
+		num = num->next;
+		temp_b = num->data;
+		num->data = temp_a;
+		temp_a = temp_b;
+	}
+	lst_add_back(stack->num, temp_a);
+	lst_loop(stack->num);
+}
+
+void	add_top(int data, t_stack *stack)
+{
 	if (!stack->num)
 	{
 		stack->num = lst_new(data);
@@ -26,24 +43,10 @@ static void	add_top(int data, t_stack *stack)
 		lst_loop(stack->num);
 	}
 	else
-	{
-		lst_unloop(stack->num);
-		num = stack->num;
-		temp_a = num->data;
-		num->data = data;
-		while (num->next)
-		{
-			num = num->next;
-			temp_b = num->data;
-			num->data = temp_a;
-			temp_a = temp_b;
-		}
-		lst_add_back(stack->num, temp_a);
-		lst_loop(stack->num);
-	}
+		insert(data, stack);
 }
 
-static void	rmv_top(t_stack *stack)
+void	rmv_top(t_stack *stack)
 {
 	t_numbers	*num;
 	t_numbers	*last;
@@ -66,14 +69,5 @@ static void	rmv_top(t_stack *stack)
 		num = NULL;
 		stack->num->prev = last;
 		last->next = stack->num;
-	}
-}
-
-void	push(t_stack *a, t_stack *b)
-{	
-	if (b->num)
-	{
-		add_top(b->num->data, a);
-		rmv_top(b);
 	}
 }
