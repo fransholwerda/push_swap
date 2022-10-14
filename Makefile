@@ -6,7 +6,7 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/09/28 15:50:46 by fholwerd      #+#    #+#                  #
-#    Updated: 2022/10/13 16:16:31 by fholwerd      ########   odam.nl          #
+#    Updated: 2022/10/14 14:40:18 by fholwerd      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,18 +22,22 @@ SRC		= $(ROOT)src/five_sort.c \
 			$(ROOT)src/struct_utility.c \
 			$(ROOT)src/three_sort.c
 SRC_PW	= $(ROOT)src/push_swap.c
-SRC_CH	= $(ROOT)src/checker_bonus.c
+SRC_CH	= $(ROOT)src_bonus/checker_bonus.c \
+			$(ROOT)src_bonus/get_next_line_bonus.c \
+			$(ROOT)src_bonus/get_next_line_utils_bonus.c
 OBJ_PW	= $(SRC_PW:.c=.o)
 OBJ_CH	= $(SRC_CH:.c=.o)
 OBJ		= $(SRC:.c=.o)
 INCLUDE	= -I$(ROOT)include \
 			-I$(ROOT)libft
+INC_CH	= -I$(ROOT)include_bonus
 LIB		= $(ROOT)libft/libft.a
 CFLAGS	= -Wall -Wextra -Werror
 
 ifdef WITH_BONUS
 	NAME = $(NAME_CH)
 	OBJ_COMPILE = $(OBJ) $(OBJ_CH)
+	INCLUDE := $(INCLUDE) $(INC_CH)
 else
 	NAME = $(NAME_PW)
 	OBJ_COMPILE = $(OBJ) $(OBJ_PW)
@@ -69,4 +73,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all libs bonus clean fclean re

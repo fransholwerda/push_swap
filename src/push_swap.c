@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/28 17:07:02 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/10/13 16:07:41 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/10/14 14:49:37 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,9 @@
 
 void	stop(char *s)
 {
-	if (errno == 0)
-		write(2, s, ft_strlen(s));
+	write(2, s, ft_strlen(s));
 	exit(EXIT_FAILURE);
 }
-
-// static void	check_leaks(void)
-// {
-// 	/*bla*/
-// 	system("leaks push_swap");
-// }
 
 /* Replacing the data (number) with the index itself */
 static void	replace_data(t_stack *a)
@@ -74,7 +67,6 @@ int	main(int argc, char **argv)
 	t_stack	*a;
 	t_stack	*b;
 
-	//atexit(check_leaks);
 	if (argc >= 2)
 	{
 		a = fill_stack(argc, argv);

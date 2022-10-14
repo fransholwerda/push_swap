@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 14:10:49 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/10/03 13:20:28 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/10/14 13:43:48 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ static t_numbers	*multiple_arguments(int argc, char **argv)
 static t_numbers	*single_argument(char **argv)
 {
 	t_numbers	*num;
-	int			i;
+	size_t		i;
 
 	num = NULL;
 	i = 0;
-	while (ft_isdigit(argv[1][i]) || argv[1][i] == ' ' || argv[1][i] == '-')
+	while (i < ft_strlen(argv[1]))
 	{
+		if (!(ft_isdigit(argv[1][i]) || argv[1][i] == ' ' || argv[1][i] == '-'))
+			stop("Error\n");
 		if (ft_isdigit(argv[1][i]) || argv[1][i] == '-')
 		{
 			if (!num)
