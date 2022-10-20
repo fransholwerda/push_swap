@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/30 11:18:38 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/09/29 14:51:35 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/10/14 16:48:12 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 
 typedef struct s_list
 {

@@ -6,12 +6,27 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 14:10:49 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/10/14 13:43:48 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/10/20 13:34:39 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 #include <libft.h>
+
+void	minus_checker(char *str)
+{
+	int	i;
+
+	i = 1;
+	if (str[i] == '\0')
+		stop("Error\n");
+	while (str[i] != ' ' && str[i] != '\0')
+	{
+		if (!ft_isdigit(str[i]))
+			stop("Error\n");
+		i++;
+	}
+}
 
 static t_numbers	*multiple_arguments(int argc, char **argv)
 {
@@ -22,6 +37,8 @@ static t_numbers	*multiple_arguments(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
+		if (argv[i][0] == '-')
+			minus_checker(argv[i]);
 		if ((!ft_isint(argv[i]) && (argv[i][0] != '-')) || argc < 2)
 			stop("Error\n");
 		if (!num)
@@ -42,6 +59,8 @@ static t_numbers	*single_argument(char **argv)
 	i = 0;
 	while (i < ft_strlen(argv[1]))
 	{
+		if (argv[1][i] == '-')
+			minus_checker(&argv[1][i]);
 		if (!(ft_isdigit(argv[1][i]) || argv[1][i] == ' ' || argv[1][i] == '-'))
 			stop("Error\n");
 		if (ft_isdigit(argv[1][i]) || argv[1][i] == '-')
@@ -50,9 +69,7 @@ static t_numbers	*single_argument(char **argv)
 				num = lst_new(ft_atoi(&argv[1][i]));
 			else
 				lst_add_back(num, ft_atoi(&argv[1][i]));
-			if (argv[1][i] == '-' && !ft_isdigit(argv[1][i + 1]))
-				stop("Error\n");
-			while (ft_isdigit(argv[1][i]) || argv[1][i] == '-')
+			while (ft_isdigit(argv[1][i]))
 				i++;
 		}
 		i++;
@@ -83,28 +100,4 @@ t_stack	*fill_stack(int argc, char **argv)
 		stop("Error\n");
 	stack->num = fill_numbers(argc, argv);
 	return (stack);
-}
-
-int	validate_stack(t_stack *stack)
-{
-	t_numbers	*num;
-
-	if (stack)
-	{
-		num = stack->num;
-		if (num)
-		{
-			while (num->next->pos > num->pos)
-			{
-				if (num->data >= num->next->data)
-					return (0);
-				num = num->next;
-			}
-			return (1);
-		}
-		else
-			return (0);
-	}
-	else
-		return (0);
 }

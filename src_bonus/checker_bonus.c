@@ -6,18 +6,12 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/13 14:13:17 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/10/14 14:50:59 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/10/14 16:48:29 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 #include <get_next_line_bonus.h>
-
-void	stop(char *s)
-{
-	write(2, s, ft_strlen(s));
-	exit(EXIT_FAILURE);
-}
 
 static void	validate(t_numbers *num, t_stack *b)
 {
@@ -25,7 +19,7 @@ static void	validate(t_numbers *num, t_stack *b)
 	{
 		while (num->next->pos > num->pos)
 		{
-			if (num->data >= num->next->data)
+			if (num->data > num->next->data)
 			{
 				write(1, "KO\n", 3);
 				return ;

@@ -6,19 +6,21 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/09/28 15:50:46 by fholwerd      #+#    #+#                  #
-#    Updated: 2022/10/14 14:40:18 by fholwerd      ########   odam.nl          #
+#    Updated: 2022/10/20 13:36:02 by fholwerd      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 ROOT	= $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 NAME_PW	= push_swap
 NAME_CH = checker
-SRC		= $(ROOT)src/five_sort.c \
+SRC		= $(ROOT)src/duplicate.c \
+			$(ROOT)src/five_sort.c \
 			$(ROOT)src/parse.c \
 			$(ROOT)src/radix_sort.c \
 			$(ROOT)src/rule_actions.c \
 			$(ROOT)src/rules_utility.c \
 			$(ROOT)src/rules.c \
+			$(ROOT)/src/stop.c \
 			$(ROOT)src/struct_utility.c \
 			$(ROOT)src/three_sort.c
 SRC_PW	= $(ROOT)src/push_swap.c

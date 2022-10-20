@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/28 16:57:00 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/10/14 14:17:55 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/10/15 12:49:39 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		lst_unloop(t_numbers *list);
 t_numbers	*fill_numbers(int argc, char **argv);
 t_stack		*fill_stack(int argc, char **argv);
 int			validate_stack(t_stack *stack);
+void		check_duplicate(t_stack *a);
 
 /* Checker */
 int			checker(int argc, char **argv);

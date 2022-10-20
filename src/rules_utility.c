@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   rules_utility.c.c                                  :+:    :+:            */
+/*   rules_utility.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 15:14:34 by fholwerd      #+#    #+#                 */
-/*   Updated: 2022/10/13 13:35:27 by fholwerd      ########   odam.nl         */
+/*   Updated: 2022/10/20 13:34:29 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,28 @@ void	rmv_top(t_stack *stack)
 		stack->num->prev = last;
 		last->next = stack->num;
 	}
+}
+
+int	validate_stack(t_stack *stack)
+{
+	t_numbers	*num;
+
+	if (stack)
+	{
+		num = stack->num;
+		if (num)
+		{
+			while (num->next->pos > num->pos)
+			{
+				if (num->data > num->next->data)
+					return (0);
+				num = num->next;
+			}
+			return (1);
+		}
+		else
+			return (0);
+	}
+	else
+		return (0);
 }
